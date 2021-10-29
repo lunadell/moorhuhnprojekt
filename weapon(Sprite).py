@@ -6,29 +6,31 @@ class IWeapon(Sprite):
         self.ammo = ammo
         self.diameter = diameter
 
-    def update(self):
+    def update(self, event_list): # event list?
         # Move crosshair based on mouse position
         pos = pygame.mouse.get_pos()
         self.rect.center = pos
 
         ## Kill enemy
-
+        
+        for event in event_list:
         # IF mouseclick, then
-        if event.type == pygame.MOUSEBUTTONDOWN:
-           
-            # CHECK for Ammunition
-            if self.ammo < 0:
-                # Move crosshair for recoil effect
-                
-                # minus one ammo
-                pass
+            if event.type == pygame.MOUSEBUTTONDOWN:
+            
+                # CHECK for Ammunition
+                if self.ammo > 0:
+                    # Move crosshair for recoil effect
+                    
+                    # minus one ammo
+                    pass
 
-                #IF Crosshair overlap Enemy, then kill
+                    #IF Crosshair overlap Enemy, then kill
+                    if self.rect.collidepoint(event.pos):
+                        pass
+                    ''' Mediator ?'''     
 
-                ''' Mediator ?'''     
-
-            #IF Ammunition empty, no shot/kill
-            # Minimal Movment crosshair for "stuck" recoil effect
+                #IF Ammunition empty, no shot/kill
+                # Minimal Movment crosshair for "stuck" recoil effect
             
 
         
