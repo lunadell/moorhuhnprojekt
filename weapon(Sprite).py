@@ -1,9 +1,10 @@
 class IWeapon(Sprite):
 
     
-    def __init__(self, flyweightImages: dict, x: int, y: int, imagename: str, ammo: int):
+    def __init__(self, flyweightImages: dict, x: int, y: int, imagename: str, ammo: int, diameter: int):
         Sprite.__init__(self, flyweightImages: dict, x: int, y: int, imagename: str)
-        self.ammo = ammo 
+        self.ammo = ammo
+        self.diameter = diameter
 
     def update(self):
         # Move crosshair based on mouse position
@@ -24,9 +25,10 @@ class IWeapon(Sprite):
 
                 #IF Crosshair overlap Enemy, then kill
 
-                ''' Mediator'''     
+                ''' Mediator ?'''     
 
             #IF Ammunition empty, no shot/kill
+            # Minimal Movment crosshair for "stuck" recoil effect
             
 
         
@@ -34,8 +36,11 @@ class IWeapon(Sprite):
 class Weapon1(IWeapon):
     #crosshair1
     def __init__(self, flyweightImages: dict, x: int, y: int, imagename: str, ammo: int):
-        Sprite.__init__(self, flyweightImages: dict, x: int, y: int, imagename: str)
-        self.ammo = ammo 
+        ammo = 10
+        diameter = 10
+        
+        IWeapon.__init__(self, flyweightImages: dict, x: int, y: int, imagename: str)
+
         self.image = self.flyweightImages['crosshair1']
     
     
@@ -43,8 +48,11 @@ class Weapon1(IWeapon):
 class Weapon2(IWeapon):
     #crosshair2
     def __init__(self, flyweightImages: dict, x: int, y: int, imagename: str, ammo: int):
-        Sprite.__init__(self, flyweightImages: dict, x: int, y: int, imagename: str)
-        self.ammo = ammo 
+        ammo = 15
+        diameter = 15
+
+        IWeapon.__init__(self, flyweightImages: dict, x: int, y: int, imagename: str)
+
         self.image = self.flyweightImages['crosshair2']
     
 

@@ -65,7 +65,7 @@ class UnlmtAmmo(IPowerUp):
     def update(self):
         pass
 
-class StrongWoepen(IPowerUp):
+class StrongWeapon(IPowerUp):
     def update(self):
         pass
 
