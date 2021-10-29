@@ -12,7 +12,7 @@ class IWeapon(Sprite):
         self.rect.center = pos
 
         ## Kill enemy
-        
+
         for event in event_list:
         # IF mouseclick, then
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -30,13 +30,13 @@ class IWeapon(Sprite):
                     ''' Mediator ?'''     
 
                 #IF Ammunition empty, no shot/kill
-                # Minimal Movment crosshair for "stuck" recoil effect
+                # Minimal Movement crosshair for "stuck" recoil effect
             
 
         
-
+# Default weapon / crosshair (1)
 class Weapon1(IWeapon):
-    #crosshair1
+
     def __init__(self, flyweightImages: dict, x: int, y: int, imagename: str, ammo: int):
         ammo = 10
         diameter = 10
@@ -46,9 +46,9 @@ class Weapon1(IWeapon):
         self.image = self.flyweightImages['crosshair1']
     
     
-    
+# Power-Up Only weapon / crosshair (2)
 class Weapon2(IWeapon):
-    #crosshair2
+    
     def __init__(self, flyweightImages: dict, x: int, y: int, imagename: str, ammo: int):
         ammo = 15
         diameter = 15
