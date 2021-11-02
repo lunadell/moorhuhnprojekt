@@ -1,0 +1,65 @@
+import pygame
+
+#init
+pygame.init()
+size = (800,600)
+screen = pygame.display.set_mode(size)
+pygame.display.set_caption("Moorhuhn")
+clock = pygame.time.Clock()
+
+#Background 
+bg_w, bg_h = size 
+bg = pygame.transform.smoothscale(pygame.image.load('bg.png'), (bg_w, bg_h))
+
+#player
+class spieler:
+    def __init__(self, name):
+        self.name = name
+        self.score = 0
+        self.pos_x = 0
+        self.speed = 4
+
+    def bewegen(self):
+     global bg
+     allKeys = pygame.key.get_pressed()
+     if allKeys[pygame.K_LEFT]:
+          self.pos_x += self.speed 
+     elif  allKeys[pygame.K_RIGHT]:
+          self.pos_x -= self.speed 
+     else:
+          self.pos_x += 0
+          
+     x_rel = self.pos_x % bg_w
+     if x_rel > 0:
+        x_part2 = x_rel - bg_w  
+     else:
+        x_part2 = x_rel + bg_w
+     screen.blit(bg, (x_rel, 0))
+     screen.blit(bg, (x_part2, 0))    
+
+    def show_score(self,x,y):
+     font = pygame.font.SysFont('freesansbold.tff', 32)
+     score = font.render("Score: " + str(self.score) , True, (255,255,255))
+     screen.blit(score,(x,y)) 
+
+    def Score_kills (self):
+        self.score += 5
+
+#Beispiel
+player = spieler("name") 
+
+
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+#Background and side scrolling auf dem Bildschirm: 
+    player.bewegen() 
+   
+#Score anzeigen auf dem Bildschirm    
+    player.show_score(10,10)
+
+    pygame.display.flip() 
+    pygame.display.quit 
