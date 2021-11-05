@@ -1,3 +1,5 @@
+import pygame as pg
+
 class Sprite(pygame.sprite.Sprite):
     def __init__(self, flyweightImages: dict, x: int, y: int, imagename: str):
         self.x = x

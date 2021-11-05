@@ -1,3 +1,6 @@
+import pygame as pg
+from sprites import *
+
 class IWeapon(Sprite):
 
     
@@ -24,13 +27,16 @@ class IWeapon(Sprite):
                     # minus one ammo
                     pass
 
+                    ''' Mediator ?'''  
                     #IF Crosshair overlap Enemy, then kill
                     if self.rect.collidepoint(event.pos):
                         pass
-                    ''' Mediator ?'''     
+                       
 
-                #IF Ammunition empty, no shot/kill
-                # Minimal Movement crosshair for "stuck" recoil effect
+                # IF Ammunition empty, no shot/kill
+                if self.ammo == 0:
+                    pass
+                    # Minimal Movement crosshair for "stuck" recoil effect
             
 
         
