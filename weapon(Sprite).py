@@ -29,6 +29,7 @@ class IWeapon(Sprite):
 
                     ''' Mediator ?'''  
                     #IF Crosshair overlap Enemy, then kill
+                    # mind: accuracy?
                     if self.rect.collidepoint(event.pos):
                         pass
                        
