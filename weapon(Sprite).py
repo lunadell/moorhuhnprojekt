@@ -25,7 +25,7 @@ class IWeapon(Sprite):
                     # Move crosshair for recoil effect
                     
                     # minus one ammo
-                    pass
+                    self.ammo -= 1
 
                     ''' Mediator ?'''  
                     #IF Crosshair overlap Enemy, then kill
