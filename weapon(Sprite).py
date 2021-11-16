@@ -1,11 +1,11 @@
-import pygame as pg
+import pygame
 from sprites import *
 
 class IWeapon(Sprite):
 
     
     def __init__(self, flyweightImages: dict, x: int, y: int, imagename: str, ammo: int, diameter: int):
-        Sprite.__init__(self, flyweightImages: dict, x: int, y: int, imagename: str)
+        Sprite.__init__(self, flyweightImages, x, y, imagename)
         self.ammo = ammo
         self.diameter = diameter
 
@@ -48,7 +48,7 @@ class Weapon1(IWeapon):
         ammo = 10
         diameter = 10
         
-        IWeapon.__init__(self, flyweightImages: dict, x: int, y: int, imagename: str)
+        IWeapon.__init__(self, flyweightImages, x, y, imagename)
 
         self.image = self.flyweightImages['crosshair1']
     
@@ -60,13 +60,10 @@ class Weapon2(IWeapon):
         ammo = 15
         diameter = 15
 
-        IWeapon.__init__(self, flyweightImages: dict, x: int, y: int, imagename: str)
+        IWeapon.__init__(self, flyweightImages, x, y, imagename)
 
         self.image = self.flyweightImages['crosshair2']
     
-
-   
-
 
             
 
