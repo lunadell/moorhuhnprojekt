@@ -93,7 +93,7 @@ while running:
 #Background and side scrolling auf dem Bildschirm: 
     player.bewegen() 
    
-#Score anzeigen auf dem Bildschirm    
+#Score & Timer anzeigen auf dem Bildschirm    
     player.show_score()
     time()
 
