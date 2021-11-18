@@ -11,7 +11,7 @@ from settings import *
 pygame.init()
 pygame.mixer.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.SCALED)
-pygame.display.set_caption("My Game")
+pygame.display.set_caption("Cavebat")
 
 # create object
 sprites = []
@@ -68,9 +68,8 @@ while running:
                 sprites.append(flederFactory.createObject5AtPosition(x,y))                   
             elif z == 6:
                 sprites.append(flederFactory.createObject6AtPosition(x,y))   
+    
     # Update
-
-
     for ballon in ballons:
         ballon.update()
 
