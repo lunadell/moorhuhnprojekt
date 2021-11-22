@@ -1,14 +1,19 @@
 # Settings
-WIDTH = 480
-HEIGHT = 360
-FPS = 60
+from pygame.constants import FULLSCREEN
+
+
+WIDTH = 1920
+HEIGHT = 1080
+fps = 60
+
 
 # Sprite
-SPEED = 160 / FPS
-FLEDERSPEED = int(FPS * 0.125)
-KURBESSPEED = int(FPS * 0.25)
-FLUG = 120 / FPS
-
+SPEED = 960 / fps
+FLEDERSPEED = int(fps * 0.125)
+KURBESSPEED = int(fps * 0.25)
+FLUG = 120 / fps
+KEY_SPEED = 8
 # Colors
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
+

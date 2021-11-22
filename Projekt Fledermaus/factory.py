@@ -4,6 +4,7 @@ from flyweight import *
 import pygame as pg
 import random
 
+pg.display.set_caption("Moorhuhn")
 
 class FlederFactory:
     def __init__(self):
@@ -15,6 +16,7 @@ class FlederFactory:
         self.imageDict4 = ImageFlyweight().getFLyweightImages4()
         self.imageDict5 = ImageFlyweight().getFLyweightImages5()
         self.imageDict6 = ImageFlyweight().getFLyweightImages6()
+
 
 
     def createObjectAtPosition(self, x, y):
@@ -72,3 +74,4 @@ class BallonFactory:
         ballon = SlowMotion(self.image, x, y, x, FLUG * 0.5 )
 
         return ballon
+

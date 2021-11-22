@@ -21,7 +21,10 @@ class ImageFlyweight:
         self.images5 = {}
         self.images6 = {}
 
+        #Ballon bzw. Kürbis
         self.imageBallon = {}
+
+     
 
         #Kürbis
         for i in range(1, 5):
@@ -62,6 +65,10 @@ class ImageFlyweight:
             self.images6['fleder'+str(i)] =pg.transform.flip(pg.transform.scale(pg.image.load(os.path.join(
                 img_folder, 'fleder'+str(i)+'.png')).convert_alpha(), (81,90)),True, False) 
 
+        # #Crosshair
+        # self.imageCrosshair['crosshair1'] = pg.image.load(os.path.join(
+        #         img_folder, 'crosshair.png')).convert_alpha()
+
 
     def getFlyweightImages(self):
         return self.images
@@ -87,3 +94,4 @@ class ImageFlyweight:
     #PowerUp
     def getFlyweightImagesBallon(self):
         return self.imageBallon
+
