@@ -1,0 +1,44 @@
+import pygame
+
+#init
+ 
+pygame.init()
+screen_size = (1500,750)
+screen = pygame.display.set_mode(screen_size)
+pygame.display.set_caption("Moorhuhn")
+clock = pygame.time.Clock()
+counter  = 60
+text = "60".rjust(3)
+pygame.time.set_timer(pygame.USEREVENT, 1000)
+font = pygame.font.SysFont('freesansbold.tff', 44)
+ 
+#Countdown timer
+def time():
+ screen.blit(font.render("Time: " + text, True, (255, 255, 255)), (10, 48))
+
+#Background 
+size = (1500,750)  #Background size
+bg_w, bg_h = size 
+bg = pygame.transform.smoothscale(pygame.image.load('b.png'), (bg_w, bg_h)) 
+
+
+
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.USEREVENT:
+            counter -= 1
+            if counter > 0:
+              text = str(counter).rjust(3)  
+            else: 
+                text = ' Fertig' 
+
+        if event.type == pygame.QUIT:
+            running = False
+
+
+    screen.blit(bg, (0,0))
+    time()
+    pygame.display.flip() 
+    pygame.display.quit 
+    clock.tick(60)
