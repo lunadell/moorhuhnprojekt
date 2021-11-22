@@ -1,0 +1,63 @@
+import pygame
+from pygame.display import update
+
+#init
+ 
+pygame.init()
+screen_size = (1500,750)
+screen = pygame.display.set_mode(screen_size)
+pygame.display.set_caption("Moorhuhn")
+clock = pygame.time.Clock()
+counter  = 60
+text = "60".rjust(3)
+pygame.time.set_timer(pygame.USEREVENT, 1000)
+font = pygame.font.SysFont('freesansbold.tff', 44)
+ 
+ 
+#Countdown timer
+def time():
+ screen.blit(font.render("Time: " + text, True, (255, 255, 255)), (10, 48))
+
+
+#Background 
+size = (3500,750)  #Background size
+bg_w, bg_h = size 
+bg = pygame.transform.smoothscale(pygame.image.load('b.png'), (bg_w, bg_h)) 
+pos_x = 0
+speed = 13
+
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.USEREVENT:
+            counter -= 1
+            if counter > 0:
+              text = str(counter).rjust(3)  
+            else: 
+                text = ' Fertig' 
+
+        if event.type == pygame.QUIT:
+            running = False
+
+  
+   
+
+    allKeys = pygame.key.get_pressed()
+    if allKeys[pygame.K_LEFT]:  
+      pos_x += speed   
+    elif  allKeys[pygame.K_RIGHT]:
+      pos_x -= speed 
+    else:
+      pos_x += 0
+      
+    x_rel = pos_x % bg_w
+    if x_rel > 0:
+      x_part2 = x_rel - bg_w  
+    else:
+      x_part2 = x_rel + bg_w 
+    screen.blit(bg, (x_rel,0))
+    screen.blit(bg, (x_part2,0))
+     
+    pygame.display.flip() 
+    pygame.display.quit 
+    clock.tick(60)
