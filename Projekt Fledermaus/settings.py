@@ -2,13 +2,13 @@
 from pygame.constants import FULLSCREEN
 
 
-WIDTH = 1920
-HEIGHT = 1080
+WIDTH = 1920/2
+HEIGHT = 1080/2
 fps = 60
 
 
 # Sprite
-SPEED = 960 / fps
+SPEED = 360/ fps
 FLEDERSPEED = int(fps * 0.125)
 KURBESSPEED = int(fps * 0.25)
 FLUG = 120 / fps

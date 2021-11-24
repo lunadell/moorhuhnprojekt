@@ -4,6 +4,8 @@ from pygame.time import *
 from flyweight import *
 from settings import *
 import random
+from Weapon import *
+
 
 class Sprite:
     def __init__(self, flyweightImages: dict, x: int, y: int, imagename: str):
@@ -56,6 +58,13 @@ class Fledermaus(FliegendesObjekt):
 
         self.y = self.y
         self.rect.center = (self.x, self.y)
+
+    
+
+        # if event.type == pg.MOUSEBUTTONDOWN and self.rect.colliderect(IWeapon.getRect()):
+
+       
+
 
         # if (self.rect.bottom >= HEIGHT):
         #     self.sy = self.sy * -1
@@ -135,7 +144,6 @@ class IPowerUp(FliegendesObjekt):
 
 class SlowMotion(IPowerUp):
 
-
     def update(self):
         IPowerUp.update(self)
 
@@ -154,48 +162,48 @@ class StrongWeapen(IPowerUp):
         IPowerUp.update(self)
 
 
-class IWeapon():
-    def __init__(self, ammo: int):
-        game_folder = os.path.dirname(__file__)
-        img_folder = os.path.join(game_folder, 'img')
+# class IWeapon():
+#     def __init__(self, ammo: int):
+#         game_folder = os.path.dirname(__file__)
+#         img_folder = os.path.join(game_folder, 'img')
 
-        self.image = pg.image.load(os.path.join(
-                img_folder, 'crosshair1.png')).convert_alpha()
+#         self.image = pg.image.load(os.path.join(
+#                 img_folder, 'crosshair1.png')).convert_alpha()
 
-        self.rect = self.image.get_rect()
+#         self.rect = self.image.get_rect()
 
-        self.maxAmmo = ammo
-        self.currentAmmo = self.maxAmmo
+#         self.maxAmmo = ammo
+#         self.currentAmmo = self.maxAmmo
 
-        self.klick = pg.mouse.get_pressed()
+#         self.klick = pg.mouse.get_pressed()
 
 
-    def getRect(self):
-        return self.rect
+#     def getRect(self):
+#         return self.rect
 
-    def getImage(self):
-        return self.image
+#     def getImage(self):
+#         return self.image
         
   
-    def update(self):
+#     def update(self):
     
-        self.rect.center = (pg.mouse.get_pos())
+#         self.rect.center = (pg.mouse.get_pos())
         
-        if self.klick[0] == 1 and self.currentAmmo > 0:
-            self.currentAmmo -= 1
+#         if self.klick[0] == 1 and self.currentAmmo > 0:
+#             self.currentAmmo -= 1
 
-        elif self.klick[2]== 1:
-            delay(3000)
-            self.currentAmmo = self.maxAmmo
+#         elif self.klick[2]== 1:
+#             delay(3000)
+#             self.currentAmmo = self.maxAmmo
 
-        else:
-            pass
+#         else:
+#             pass
         
         
 
-class Weapon1 (IWeapon):
+# class Weapon1 (IWeapon):
     
-    pass
+#     pass
 
       
 

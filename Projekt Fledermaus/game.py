@@ -1,8 +1,13 @@
 import pygame
 import random
 import os
+
+from pygame import mouse
 from factory import *
 from settings import *
+
+from Weapon import *
+from collider import *
 
 
 
@@ -21,18 +26,28 @@ pos_x = 0
 
 
 # create object
-sprites = []
+
+fledermaeuse = []
 ballons = []
+
 flederFactory = FlederFactory()
 ballonFactory = BallonFactory()
 
 #Crosshair
 player = Weapon1(30)
 
-#Ammo
 
-maxAmmo = 10
-ammo = maxAmmo
+# schriftart
+font = pygame.font.SysFont('freesansbold.tff', 44)
+
+#collider
+collider = Collider()
+
+#Ammo
+ammo = 10
+
+Score = 0
+score_anzeigen= font.render("Score: " + str(Score), True, WHITE)
 
 # pygame Clock 
 clock = pygame.time.Clock()
@@ -40,10 +55,7 @@ counter  = 10
 text = "10".rjust(3)
 pygame.time.set_timer(pygame.USEREVENT + 2, 1000)
 
-# schriftart
-font = pygame.font.SysFont('freesansbold.tff', 44)
 
-munition = str(ammo).rjust(3)
 
 # GameLoop running?
 running = True
@@ -62,6 +74,19 @@ while running:
 
     # Events
     for event in pygame.event.get():
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouseX,mouseY = event.pos
+            mouse_buttons = pygame.mouse.get_pressed()
+            if mouse_buttons[0] and ammo > 0:
+                ammo -=1
+            elif mouse_buttons[2]:
+                ammo = 8
+        if ammo > 0:
+            munition = font.render("Munition: "+ str(ammo),True, WHITE)
+        else:
+            munition = font.render("Munition: " + str(ammo), True, (238, 75, 43))
+
+   
         if event.type == pygame.USEREVENT + 2:
             counter -= 1
             if counter > 0:
@@ -86,41 +111,40 @@ while running:
 
             #Rechtsflieger alle Größen      
             if z == 1: 
-                sprites.append(flederFactory.createObjectAtPosition(x,y))
+                fledermaeuse.append(flederFactory.createObjectAtPosition(x,y))
+                
             elif z == 2:
-                sprites.append(flederFactory.createObject2AtPosition(x,y)) 
+                fledermaeuse.append(flederFactory.createObject2AtPosition(x,y)) 
+                
             elif z == 3:
-                sprites.append(flederFactory.createObject3AtPosition(x,y))
+                fledermaeuse.append(flederFactory.createObject3AtPosition(x,y))
+                
 
             #Linksflieger alle Größen           
             elif z == 4:
-                sprites.append(flederFactory.createObject4AtPosition(x,y))     
+                fledermaeuse.append(flederFactory.createObject4AtPosition(x,y)) 
+              
             elif z == 5:
-                sprites.append(flederFactory.createObject5AtPosition(x,y))                   
+                fledermaeuse.append(flederFactory.createObject5AtPosition(x,y))
+                                   
             elif z == 6:
-                sprites.append(flederFactory.createObject6AtPosition(x,y))   
+                fledermaeuse.append(flederFactory.createObject6AtPosition(x,y)) 
+                
+    
+    
 
-
-
-            if event.type == pg.MOUSEBUTTONDOWN:
-                mouse_click = pg.mouse.get_pressed()
-                if mouse_click[0] == 1 and ammo > 0:
-                    ammo -=1
-                    munition = str(ammo).rjust(3)
-                elif mouse_click[2] == 1:
-                    ammo = maxAmmo
-                    munition = str(ammo).rjust(3)
-                else:
-                    pass
-
-
+    # hits = pygame.sprite.groupcollide(sprites, player, True, False)
+       
+            
+            # if event.type == pygame.MOUSEBUTTONDOWN and collider.RectVsRect(sprites[i].getRect, player.getRect):
+            #     print("Nani")
 
     # Update
 
     for ballon in ballons:
         ballon.update()
 
-    for sprite in sprites:
+    for sprite in fledermaeuse:
         sprite.update()
 
     player.update()
@@ -143,8 +167,11 @@ while running:
     screen.blit(bg, (x_rel,0))
     screen.blit(bg, (x_part2,0))
 
+    
     screen.blit(font.render("Time: " + text, True, WHITE), (10, 10))
-    screen.blit(font.render("Munition: " + munition, True, WHITE), (WIDTH/2, HEIGHT/2))    
+   
+    screen.blit(munition, (WIDTH-300, HEIGHT-50))
+    screen.blit(score_anzeigen, (10,100))
 
     # Double Buffering
     pygame.display.flip()
@@ -154,7 +181,7 @@ while running:
 
     # Render
     
-    for sprite in sprites:
+    for sprite in fledermaeuse:
         screen.blit(sprite.getImage(), sprite.getRect())
 
     for ballon in ballons:
@@ -166,6 +193,7 @@ while running:
     pygame.display.flip()
 
 clock.tick(fps)
+
 # Done! Time to quit.
 
 pygame.quit()

@@ -3,6 +3,7 @@ from sprites import *
 from flyweight import *
 import pygame as pg
 import random
+from Weapon import *
 
 pg.display.set_caption("Moorhuhn")
 
