@@ -21,14 +21,14 @@ class ImageFlyweight:
         self.images5 = {}
         self.images6 = {}
 
-        #Ballon bzw. Kürbis
-        self.imageBallon = {}
+        #kurbes bzw. Kürbis
+        self.imageKurbes = {}
 
      
 
         #Kürbis
         for i in range(1, 5):
-            self.imageBallon['kurbes'+str(i)] = pg.image.load(os.path.join(
+            self.imageKurbes['kurbes'+str(i)] = pg.image.load(os.path.join(
                 img_folder, 'kurbes'+str(i)+'.png')).convert_alpha()
 
 
@@ -92,6 +92,6 @@ class ImageFlyweight:
 
 
     #PowerUp
-    def getFlyweightImagesBallon(self):
-        return self.imageBallon
+    def getFlyweightImagesKurbes(self):
+        return self.imageKurbes
 

@@ -18,6 +18,7 @@ pygame.mixer.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.SCALED)
 pygame.display.set_caption("Fledermaus")
 
+
 #Background
 size = (WIDTH,HEIGHT)  
 bg_w, bg_h = size 
@@ -28,14 +29,15 @@ pos_x = 0
 # create object
 
 fledermaeuse = []
-ballons = []
+kurbese = []
 
 flederFactory = FlederFactory()
-ballonFactory = BallonFactory()
+kurbesFactory = KurbesFactory()
 
 #Crosshair
-player = Weapon1(30)
+player = Weapon1()
 
+vier = player.getRect
 
 # schriftart
 font = pygame.font.SysFont('freesansbold.tff', 44)
@@ -43,11 +45,13 @@ font = pygame.font.SysFont('freesansbold.tff', 44)
 #collider
 collider = Collider()
 
+
 #Ammo
-ammo = 10
+ammo = MAXAMMO
 
 Score = 0
 score_anzeigen= font.render("Score: " + str(Score), True, WHITE)
+
 
 # pygame Clock 
 clock = pygame.time.Clock()
@@ -60,13 +64,13 @@ pygame.time.set_timer(pygame.USEREVENT + 2, 1000)
 # GameLoop running?
 running = True
 
-ballon_spawn = pygame.USEREVENT + 1
-pygame.time.set_timer(ballon_spawn,random.randint(10000,12000))
+kurbes_spawn = pygame.USEREVENT + 1
+pygame.time.set_timer(kurbes_spawn,random.randint(10000,12000))
 
 fledermaus_spawn = pygame.USEREVENT + 0
-pygame.time.set_timer(fledermaus_spawn,random.randint(1000,2000))
+pygame.time.set_timer(fledermaus_spawn,random.randint(1000,1500))
 
-
+collider = Collider()
 
 while running:
     # Delta Time
@@ -80,7 +84,7 @@ while running:
             if mouse_buttons[0] and ammo > 0:
                 ammo -=1
             elif mouse_buttons[2]:
-                ammo = 8
+                ammo = MAXAMMO
         if ammo > 0:
             munition = font.render("Munition: "+ str(ammo),True, WHITE)
         else:
@@ -92,16 +96,16 @@ while running:
             if counter > 0:
               text = str(counter).rjust(3)  
             else: 
-                text = ' Fertig'                 
+                text = 'Fertig'                 
         if event.type == pygame.QUIT:
             running = False
 
         #Spawn PowerUps
-        if event.type == ballon_spawn:
+        if event.type == kurbes_spawn:
             x = random.randint(0, WIDTH)
             y = 0
 
-            ballons.append(ballonFactory.createBallonAtPosition(x,y))
+            kurbese.append(kurbesFactory.createKurbesAtPosition(x,y))
 
         #Spawn Fledermäuse
         if event.type == fledermaus_spawn:
@@ -109,8 +113,9 @@ while running:
             x = random.randint(0,WIDTH)
             y = random.randint(0,HEIGHT)
 
+
             #Rechtsflieger alle Größen      
-            if z == 1: 
+            if z == 1:               
                 fledermaeuse.append(flederFactory.createObjectAtPosition(x,y))
                 
             elif z == 2:
@@ -131,23 +136,35 @@ while running:
                 fledermaeuse.append(flederFactory.createObject6AtPosition(x,y)) 
                 
     
-    
 
-    # hits = pygame.sprite.groupcollide(sprites, player, True, False)
-       
-            
-            # if event.type == pygame.MOUSEBUTTONDOWN and collider.RectVsRect(sprites[i].getRect, player.getRect):
-            #     print("Nani")
+   
+    for sprite in fledermaeuse:
+        if collider.RectVsRect(sprite.getRect(),player.getRect()):
+            print("Hit",sprite.getRect())
+
+            fledermaeuse.remove(sprite)
+
+
+   
+    for sprite in fledermaeuse:
+        if collider.RectVsRect(sprite.getRect(),player.getRect()):
+            print("Hit",sprite.getRect())
+
+            fledermaeuse.remove(sprite)
+
+
+
 
     # Update
 
-    for ballon in ballons:
-        ballon.update()
+    for kurbes in kurbese:
+        kurbes.update()
 
     for sprite in fledermaeuse:
         sprite.update()
 
     player.update()
+
 
 
     # aktualisiere Anzige
@@ -184,8 +201,8 @@ while running:
     for sprite in fledermaeuse:
         screen.blit(sprite.getImage(), sprite.getRect())
 
-    for ballon in ballons:
-        screen.blit(ballon.getImage(), ballon.getRect())
+    for kurbes in kurbese:
+        screen.blit(kurbes.getImage(), kurbes.getRect())
     
     screen.blit(player.getImage(), player.getRect())
 
@@ -195,5 +212,4 @@ while running:
 clock.tick(fps)
 
 # Done! Time to quit.
-
 pygame.quit()

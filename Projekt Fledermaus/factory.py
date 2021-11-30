@@ -22,57 +22,57 @@ class FlederFactory:
 
     def createObjectAtPosition(self, x, y):
                             
-        ball1 = Fledermaus(self.imageDict, x, y, SPEED * random.choice([1,  0.5]),
+        object1 = Fledermaus(self.imageDict, x, y, SPEED * random.choice([0.7,  0.3]),
                    SPEED * random.choice([1,  0.5]))
         
-        return ball1
+        return object1
 
 
     def createObject2AtPosition(self, x, y):
                    
-        ball2 = Fledermaus(self.imageDict2, x , y, SPEED * random.choice([1,  0.5]),
+        object2 = Fledermaus(self.imageDict2, x , y, SPEED * random.choice([0.7,  0.3]),
             SPEED * random.choice([1,  0.5]))
 
-        return ball2
+        return object2
 
     def createObject3AtPosition(self, x, y):
                    
-        ball3 = Fledermaus(self.imageDict3, x , y, SPEED * random.choice([1,  0.5]),
+        object3 = Fledermaus(self.imageDict3, x , y, SPEED * random.choice([0.7,  0.3]),
             SPEED * random.choice([1,  0.5]))
 
-        return ball3        
+        return object3        
 
 
     #Ab hier Linksflieger
 
     def createObject4AtPosition(self, x, y):
                    
-        ball4 = Fledermaus(self.imageDict4, x , y, SPEED * random.choice([-1,  -0.5]),
+        object4 = Fledermaus(self.imageDict4, x , y, SPEED * random.choice([-0.7,  -0.3]),
             SPEED * random.choice([-1,  -0.5]))
 
-        return ball4
+        return object4
 
     def createObject5AtPosition(self, x, y):
                    
-        ball5 = Fledermaus(self.imageDict5, x , y, SPEED * random.choice([-1,  -0.5]),
+        object5 = Fledermaus(self.imageDict5, x , y, SPEED * random.choice([-0.7,  -0.3]),
             SPEED * random.choice([-1,  -0.5]))
 
-        return ball5
+        return object5
 
     def createObject6AtPosition(self, x, y):
                    
-        ball6 = Fledermaus(self.imageDict6, x , y, SPEED * random.choice([-1,  -0.5]),
+        object6 = Fledermaus(self.imageDict6, x , y, SPEED * random.choice([-0.7,  -0.3]),
             SPEED * random.choice([-1,  -0.5]))
 
-        return ball6        
+        return object6        
 
-class BallonFactory:
+class KurbesFactory:
     def __init__(self):
-        self.image = ImageFlyweight().getFlyweightImagesBallon()
+        self.image = ImageFlyweight().getFlyweightImagesKurbes()
 
-    def createBallonAtPosition(self,x,y):
+    def createKurbesAtPosition(self,x,y):
         
-        ballon = SlowMotion(self.image, x, y, x, FLUG * 0.5 )
+        kurbes = SlowMotion(self.image, x, y, x, FLUG * 0.5 )
 
-        return ballon
+        return kurbes
 
